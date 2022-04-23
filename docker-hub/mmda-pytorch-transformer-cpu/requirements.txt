@@ -1,0 +1,18 @@
+# Config
+espresso-config==0.8.2
+
+# parsing-pdfs
+pdfplumber==0.6.0
+pandas==1.4.1
+requests==2.26.0
+
+# dependecies for MMDA; we need to install them here cuz
+# they are not version-locked on github
+torch==1.9.0
+torchvision==0.10.0
+PyPDF2==1.26.0
+transformers==4.5
+
+# mmda dependencies
+layoutparser[effdet]==0.3.4
+vila[lp_predictors,vila_predictors]==0.3.0
