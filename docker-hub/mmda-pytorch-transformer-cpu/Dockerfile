@@ -19,6 +19,9 @@ RUN pip install --upgrade pip setuptools wheel
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# download small spacy model 
+RUN python -m spacy download en_core_web_sm
+
 # These git repo must be installed AFTER requirements.txt deps
 RUN pip install git+https://github.com/facebookresearch/detectron2.git@v0.4
 RUN pip install git+https://github.com/allenai/mmda.git@lucas/fix-float-bboxes
