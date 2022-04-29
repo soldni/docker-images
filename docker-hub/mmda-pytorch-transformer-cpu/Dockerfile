@@ -1,5 +1,5 @@
 # REPOSITORY: soldni/mmda-pytorch-transformer-cpu
-# TAG: 1.0
+# TAG: 1.2
 
 FROM python:3.9.7
 
