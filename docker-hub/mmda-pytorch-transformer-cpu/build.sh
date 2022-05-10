@@ -57,13 +57,30 @@ if [ -z ${TAG} ]; then
     script_exit 1
 fi
 
+ARCH=$(cat Dockerfile | get_attr ARCH)
+if [ -z ${TAG} ]; then
+    echo "[ERROR] '# ARCH: ' declaration missing" > /dev/stderr
+    script_exit 1
+fi
+
+BUILDER_NAME=$(echo "$REPOSITORY:$TAG" | sed "s/[\/:]/_/g")
+
 set -ex
 
-# Build image
-docker image build --tag "$REPOSITORY:$TAG" .
+# Create builder
+docker buildx create --name $BUILDER_NAME --use
 
-# Push to hub
-docker image push "$REPOSITORY:$TAG"
+# build and push
+docker buildx build --platform $ARCH -t "$REPOSITORY:$TAG" --push .
+
+# delete builder
+docker buildx rm $BUILDER_NAME
+
+# # Build image
+# docker image build --tag "$REPOSITORY:$TAG" .
+
+# # Push to hub
+# docker image push "$REPOSITORY:$TAG"
 
 set +ex
 

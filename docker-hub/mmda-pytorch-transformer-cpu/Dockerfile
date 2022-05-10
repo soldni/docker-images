@@ -1,5 +1,6 @@
 # REPOSITORY: soldni/mmda-pytorch-transformer-cpu
 # TAG: 1.2
+# ARCH: linux/amd64,linux/arm64
 
 FROM python:3.9.7
 
@@ -19,7 +20,7 @@ RUN pip install --upgrade pip setuptools wheel
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# download small spacy model 
+# download small spacy model
 RUN python -m spacy download en_core_web_sm
 
 # These git repo must be installed AFTER requirements.txt deps
