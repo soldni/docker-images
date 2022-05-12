@@ -1,5 +1,5 @@
-# REPOSITORY: soldni/mmda-pytorch-transformer-cpu
-# TAG: 1.2
+# REPO: docker://soldni/mmda-pytorch-transformer-cpu
+# VERS: 1.2
 # ARCH: linux/amd64,linux/arm64
 
 FROM python:3.9.7

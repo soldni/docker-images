@@ -1,0 +1,2 @@
+# Config
+espresso-config==0.10.2
