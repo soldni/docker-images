@@ -139,7 +139,6 @@ def main():
     # CREATE BUILDER
     builder_name = f'{name.replace("/", "_")}_{version.replace("/", "_")}'
     cmd = f'docker buildx create --name {builder_name} --use'
-    cleanup_cmds.append(f'docker buildx rm {builder_name}')
     if opts.dryrun:
         print(f'DRYRUN: {cmd}')
     else:
