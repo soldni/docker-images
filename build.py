@@ -1,4 +1,4 @@
-#! /usr/bin/env	python
+#! /usr/bin/env python3
 
 """
 Build A docker image, push it to a image repository.

@@ -1,25 +1,25 @@
 # Config
-espresso-config==0.10.2
+springs>=1.2.4
 
 # Pytoch
---extra-index-url https://download.pytorch.org/whl/cu113
-torch==1.11.0+cu113
-torchdata>=0.3.0
+# --extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.12.0
+torchdata==0.4.0
 
 # Various data tools
-s3fs>=2022.2.0
-py7zr==0.18.1
+s3fs==2022.5.0
+py7zr==0.19.0
 beautifulsoup4==4.11.1
-lxml==4.8.0
-spacy==3.2.3
+lxml==4.9.1
+spacy==3.4.1
 
 # Modeling
-pytorch-lightning==1.5.10
-torchmetrics==0.7.2
-datasets[s3]==1.18.4
-transformers==4.17
+pytorch-lightning==1.6.5
+torchmetrics==0.9.3
+datasets[s3]==2.4.0
+transformers==4.20.1
 
 # Vizualization
 gpustat==0.6.0
-gradio==2.9.4
-plotly==5.8.0
+gradio==3.1.1
+plotly==5.9.0
