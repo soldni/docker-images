@@ -2,7 +2,7 @@
 springs>=1.2.4
 
 # Pytoch
-# --extra-index-url https://download.pytorch.org/whl/cu113
+--extra-index-url https://download.pytorch.org/whl/cu113
 torch==1.12.0
 torchdata==0.4.0
 
@@ -18,6 +18,10 @@ pytorch-lightning==1.6.5
 torchmetrics==0.9.3
 datasets[s3]==2.4.0
 transformers==4.20.1
+
+# Debugging and testing
+ipdb>=0.13.9
+ipython>=8.4.0
 
 # Vizualization
 gpustat==0.6.0

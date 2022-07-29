@@ -1,5 +1,5 @@
 # REPO:   beaker://python39_torch112
-# VERS:   1.1
+# VERS:   1.2
 # ARCH:   linux/amd64
 
 FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04-v0.0.15
