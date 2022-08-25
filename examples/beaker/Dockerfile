@@ -1,5 +1,5 @@
 # REPO:   beaker://ai2/lucas-test/test
-# VERS:   1.1.1
+# VERS:   1.2
 # ARCH:   linux/amd64
 
 FROM alpine
