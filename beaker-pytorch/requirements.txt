@@ -1,10 +1,10 @@
 # Config
-springs>=1.2.4
+springs>=1.3.5
 
 # Pytoch
 --extra-index-url https://download.pytorch.org/whl/cu113
-torch==1.12.0
-torchdata==0.4.0
+torch==1.12.1
+torchdata==0.4.1
 
 # Various data tools
 s3fs==2022.5.0
@@ -12,6 +12,7 @@ py7zr==0.19.0
 beautifulsoup4==4.11.1
 lxml==4.9.1
 spacy==3.4.1
+smashed>=0.2.0
 
 # Modeling
 pytorch-lightning==1.6.5
@@ -27,3 +28,7 @@ ipython>=8.4.0
 gpustat==0.6.0
 gradio==3.1.1
 plotly==5.9.0
+
+# This enables using setuptools
+pip>=22
+setuptools>=65
