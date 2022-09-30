@@ -1,5 +1,5 @@
 # REPO:   beaker://pyterrier
-# VERS:   1
+# VERS:   1.1
 # ARCH:   linux/amd64
 
 FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04-v0.0.15
@@ -12,8 +12,14 @@ RUN apt-get update && \
     apt-get clean;
 
 COPY requirements.txt .
-RUN pip install cython && \ 
-    pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu113
+
+RUN echo "Running $(conda --version)" && \
+    conda init bash && \
+    conda create -n pyterrier python=3.8 -y && \
+    conda activate pyterrier && \
+    pip install cython && \
+    pip install -r requirements.txt \
+        --extra-index-url https://download.pytorch.org/whl/cu113
 
 RUN chmod 777 -R /opt/miniconda3
 
