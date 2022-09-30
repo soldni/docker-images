@@ -12,7 +12,8 @@ RUN apt-get update && \
     apt-get clean;
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu113
+RUN pip install cython && \ 
+    pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu113
 
 RUN chmod 777 -R /opt/miniconda3
 
