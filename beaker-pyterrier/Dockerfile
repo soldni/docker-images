@@ -15,6 +15,8 @@ COPY requirements.txt .
 
 RUN echo "Running $(conda --version)" && \
     conda init bash && \
+    . /root/.bashrc && \
+    conda update conda && \
     conda create -n pyterrier python=3.8 -y && \
     conda activate pyterrier && \
     pip install cython && \
