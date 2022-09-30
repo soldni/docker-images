@@ -20,6 +20,7 @@ RUN echo "Running $(conda --version)" && \
     conda create -n pyterrier python=3.8 -y && \
     conda activate pyterrier && \
     echo "Running $(python --version)" && \
+    echo "Running $(pip --version)" && \
     pip install cython && \
     pip install -r requirements.txt \
         --extra-index-url https://download.pytorch.org/whl/cu113
