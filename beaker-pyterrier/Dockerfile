@@ -1,5 +1,5 @@
 # REPO:   beaker://pyterrier
-# VERS:   1.1
+# VERS:   1.2
 # ARCH:   linux/amd64
 
 FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04-v0.0.15
@@ -13,12 +13,9 @@ RUN apt-get update && \
 
 COPY requirements.txt .
 
-RUN echo "Running $(conda --version)" && \
-    conda init bash && \
-    . /root/.bashrc && \
-    conda update conda && \
-    conda create -n pyterrier python=3.8 -y && \
-    conda activate pyterrier && \
+RUN conda update conda && \
+    conda install python=3.8 && \
+    echo "Running $(conda --version)" && \
     echo "Running $(python --version)" && \
     echo "Running $(pip --version)" && \
     pip install cython && \
