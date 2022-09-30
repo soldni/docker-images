@@ -8,6 +8,7 @@ WORKDIR /tmp
 
 RUN apt-get update && \
     apt-get install -y openjdk-11-jre-headless && \
+    apt-get install -y openjdk-11-jdk-headless && \
     apt-get clean;
 
 COPY requirements.txt .
