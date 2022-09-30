@@ -1,0 +1,18 @@
+# REPO:   beaker://pyterrier
+# VERS:   1
+# ARCH:   linux/amd64
+
+FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04-v0.0.15
+
+WORKDIR /tmp
+
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jre-headless && \
+    apt-get clean;
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu113
+
+RUN chmod 777 -R /opt/miniconda3
+
+ENTRYPOINT [ "/bin/bash", "-l" ]
