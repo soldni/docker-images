@@ -1,33 +1,32 @@
 # Config
-springs>=1.4.5
+springs==1.9.1
 
 # Pytoch
 --extra-index-url https://download.pytorch.org/whl/cu113
-torch==1.12.1
-torchdata==0.4.1
+torch==1.13.1
+torchdata==0.5.1
 
 # Various data tools
-s3fs==2022.5.0
-py7zr==0.19.0
-beautifulsoup4==4.11.1
-lxml==4.9.1
-spacy==3.4.1
-smashed>=0.3.0
+py7zr>=0.19.0
+beautifulsoup4>=4.11.1
+lxml>=4.9.1
+spacy==3.4.4
+smashed[datasets,prompting,remote,torchdata]==0.12.0
 
 # Modeling
-pytorch-lightning==1.6.5
-torchmetrics==0.9.3
-datasets[s3]==2.4.0
-transformers==4.20.1
+pytorch-lightning==1.8.8
+torchmetrics==0.11.0
+datasets[s3]==2.8.0
+transformers==4.25.1
 
 # Debugging and testing
 ipdb>=0.13.9
-ipython>=8.4.0
+ipython>=8.7.0
 
 # Vizualization
-gpustat==0.6.0
-gradio==3.1.1
-plotly==5.9.0
+gpustat>=1.0.0
+gradio>=3.13.0
+plotly>=5.11.0
 
 # This enables using setuptools
 pip>=22

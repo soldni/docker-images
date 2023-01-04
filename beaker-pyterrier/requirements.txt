@@ -1,7 +1,7 @@
 # Pytoch
 --extra-index-url https://download.pytorch.org/whl/cu113
-torch==1.12.1
-torchdata==0.4.1
+torch==1.13.1
+torchdata==0.5.1
 
 python-terrier>=0.8.1
 ir_datasets>=0.5.3

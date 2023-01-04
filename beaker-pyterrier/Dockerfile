@@ -1,8 +1,8 @@
 # REPO:   beaker://pyterrier
-# VERS:   1.2
+# VERS:   2
 # ARCH:   linux/amd64
 
-FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04-v0.0.15
+FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04
 
 WORKDIR /tmp
 
