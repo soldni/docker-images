@@ -3,7 +3,17 @@
 torch==1.13.1
 torchdata==0.5.1
 
+# Retrieval 
 python-terrier>=0.8.1
 ir_datasets>=0.5.3
 ir-measures>=0.3.1
-transformers>=4.21.2
+
+# Data 
+datasets[s3]==2.9.0
+smashed[datasets,prompting,remote,torchdata]==0.17.1
+
+# Modeling
+pytorch-lightning==1.9.0
+torchmetrics==0.11.1
+datasets[s3]==2.9.0
+transformers==4.26.0
