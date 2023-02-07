@@ -17,3 +17,8 @@ pytorch-lightning==1.9.0
 torchmetrics==0.11.1
 datasets[s3]==2.9.0
 transformers==4.26.0
+
+# Debugging and testing
+ipdb>=0.13.9
+ipython>=8.4.0
+jupyterlab>=3.4.8

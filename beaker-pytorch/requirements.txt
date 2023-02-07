@@ -22,7 +22,8 @@ transformers==4.26.0
 
 # Debugging and testing
 ipdb>=0.13.9
-ipython>=8.7.0
+ipython>=8.4.0
+jupyterlab>=3.4.8
 
 # Vizualization
 gpustat>=1.0.0
