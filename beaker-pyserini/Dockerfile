@@ -17,7 +17,7 @@ RUN  wget -O vscode-server-setup.sh \
     https://aka.ms/install-vscode-server/setup.sh && \
     sudo bash vscode-server-setup.sh
 
-# copy requirements file 
+# copy requirements file
 COPY requirements.txt .
 
 # install python dependencies
@@ -31,7 +31,7 @@ RUN conda install python=3.8 && \
     pip install -r requirements.txt \
     --extra-index-url https://download.pytorch.org/whl/cu116 && \
     python -m spacy download en_core_web_sm && \
-    conda install -c faiss-cpu && \
+    conda install -c pytorch faiss-cpu && \
     echo "done!"
 
 RUN chmod 777 -R /opt/miniconda3
