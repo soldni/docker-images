@@ -1,0 +1,22 @@
+# Pytoch
+--extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.13.1
+torchdata==0.5.1
+
+# Retrieval 
+pyserini>=0.20.0
+ir_datasets>=0.5.3
+ir-measures>=0.3.1
+
+# Modeling
+transformers==4.26.0
+
+# Data 
+datasets[s3]==2.9.0
+smashed[datasets,prompting,remote,torchdata]==0.17.1
+
+
+# Debugging and testing
+ipdb>=0.13.9
+ipython>=8.4.0
+jupyterlab>=3.4.8

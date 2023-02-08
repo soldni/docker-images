@@ -1,5 +1,5 @@
-# REPO:   beaker://pyterrier
-# VERS:   4
+# REPO:   beaker://pyserini
+# VERS:   1
 # ARCH:   linux/amd64
 
 FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04
@@ -29,7 +29,10 @@ RUN conda install python=3.8 && \
     pip install pip --upgrade && \
     pip install pyopenssl --upgrade && \
     pip install -r requirements.txt \
-    --extra-index-url https://download.pytorch.org/whl/cu116
+    --extra-index-url https://download.pytorch.org/whl/cu116 && \
+    python -m spacy download en_core_web_sm && \
+    conda install -c faiss-cpu && \
+    echo "done!"
 
 RUN chmod 777 -R /opt/miniconda3
 

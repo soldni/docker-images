@@ -1,5 +1,5 @@
 # REPO:   beaker://python39_torch121
-# VERS:   6
+# VERS:   8
 # ARCH:   linux/amd64
 
 FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04
@@ -18,13 +18,14 @@ RUN  wget -O vscode-server-setup.sh \
 COPY requirements.txt .
 
 # Install python dependencies
-RUN conda update conda && \
-    conda install python=3.8 && \
+RUN conda install python=3.8 && \
     echo "Running $(conda --version)" && \
     echo "Running $(python --version)" && \
     echo "Running $(pip --version)" && \
     pip install cython && \
     pip install -r requirements.txt \
+    pip install pip --upgrade && \
+    pip install pyopenssl --upgrade && \
     --extra-index-url https://download.pytorch.org/whl/cu116
 
 # make sure miniconda can be modified in interactive moode
