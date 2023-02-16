@@ -2,7 +2,7 @@
 # VERS:   8
 # ARCH:   linux/amd64
 
-FROM ghcr.io/allenai/cuda:11.3-cudnn8-dev-ubuntu20.04
+FROM ghcr.io/allenai/cuda:11.5-ubuntu20.04
 
 WORKDIR /tmp
 
@@ -23,9 +23,9 @@ RUN conda install python=3.8 && \
     echo "Running $(python --version)" && \
     echo "Running $(pip --version)" && \
     pip install cython && \
-    pip install -r requirements.txt \
     pip install pip --upgrade && \
     pip install pyopenssl --upgrade && \
+    pip install -r requirements.txt \
     --extra-index-url https://download.pytorch.org/whl/cu116
 
 # make sure miniconda can be modified in interactive moode
