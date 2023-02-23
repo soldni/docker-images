@@ -1,8 +1,8 @@
 # REPO:   beaker://python39_torch121
-# VERS:   8
+# VERS:   9
 # ARCH:   linux/amd64
 
-FROM ghcr.io/allenai/cuda:11.5-ubuntu20.04
+FROM ghcr.io/allenai/cuda:11.5-cudnn8-dev-ubuntu20.04
 
 WORKDIR /tmp
 
