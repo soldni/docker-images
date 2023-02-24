@@ -119,7 +119,7 @@ def main():
         if not check_binary_exists('beaker'):
             raise RuntimeError('Beaker client not available on this system.')
 
-    elif repository == 'docker':
+    elif repository == 'docker' or repository == '':
         workspace = None
     else:
         raise ValueError(f'Repository {repository} not recognized.')
