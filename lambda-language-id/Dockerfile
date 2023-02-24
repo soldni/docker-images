@@ -1,4 +1,4 @@
-# REPO:   896129387501.dkr.ecr.us-west-2.amazonaws.com/aws-lambda-ft-lang-id
+# REPO:   ecr://896129387501.dkr.ecr.us-west-2.amazonaws.com/aws-lambda-ft-lang-id
 # VERS:   1.0.0
 # ARCH:   linux/amd64
 
@@ -23,11 +23,14 @@ FROM public.ecr.aws/lambda/python:3.8
 #         -O ${LAMBDA_TASK_ROOT}/lid.176.bin
 
 
+# yum -y install gcc-c++ libcurl-devel cmake3 git wget python3-devel.x86_64 && \
+# pip install --upgrade pip && \
+# pip install --upgrade pybind11>=2.2 && \
+
 RUN yum -y groupinstall "Development tools"  && \
-    yum -y install gcc-c++ libcurl-devel cmake3 git wget && \
+    yum -y install libcurl-devel git wget && \
     pip install --upgrade pip && \
-    pip install awscli && \
-    pip install fasttext --use-pep517 && \
+    pip install fasttext-wheel --use-pep517 && \
     wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin \
         -O ${LAMBDA_TASK_ROOT}/lid.176.bin
 

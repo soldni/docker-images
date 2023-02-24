@@ -88,6 +88,16 @@ def parse_tag(df_path: Path, tag_name: str):
     raise ValueError(f'Tag {tag_name} not found in {df_path}')
 
 
+def run_commands(*cmds, dryrun: bool = False, stop_on_error: bool = True):
+    for cmd in cmds:
+        if dryrun:
+            print(f'DRYRUN: {cmd}')
+        else:
+            out = call(cmd, shell=True)
+            if out > 0 and stop_on_error:
+                raise RuntimeError(f'{cmd} failed')
+
+
 def main():
     opts = parse_options()
 
@@ -106,6 +116,7 @@ def main():
     architectures = parse_tag(opts.root / 'Dockerfile', 'ARCH')
     repository, name = repo_name.scheme, f'{repo_name.netloc}{repo_name.path}'
 
+
     # RUNNING SOME CHECKS
     if repository == 'beaker':
         *workspace, name = name.split('/')
@@ -119,10 +130,13 @@ def main():
         if not check_binary_exists('beaker'):
             raise RuntimeError('Beaker client not available on this system.')
 
-    elif repository == 'docker' or repository == '':
+    elif repository == 'docker':
         workspace = None
+    elif repository == 'ecr':
+        workspace = name.lstrip('ecr://') + f':{version}'
+        _, name = name.rsplit('/', 1)
     else:
-        raise ValueError(f'Repository {repository} not recognized.')
+        raise ValueError(f'Repository `{repository}` not recognized.')
 
     report_card = f'''
         ------------ REPORT CARD ------------
@@ -146,9 +160,11 @@ def main():
         if out > 0:
             raise RuntimeError('Could not create builder.')
 
+    # this is only used during dryrun
+    image_id = '{image_id}'
+
     try:
         if repository == 'docker':
-
             # CREATE IMAGES AND IMMEDIATELY PUSH TO DOCKER HUB
             cmd = ('docker buildx build '
                    f'--platform {architectures} '
@@ -161,8 +177,37 @@ def main():
                 out = call(cmd, shell=True)
                 if out > 0:
                     raise RuntimeError('Could not create or push image.')
-        elif repository == 'beaker':
 
+        elif repository == 'ecr':
+            # remove old image
+            run_commands(
+                f'docker buildx rm {name}:{version}',
+                f'docker image rm {name}:{version}',
+                dryrun=opts.dryrun,
+                stop_on_error=False   
+            )
+
+            # create new image and load into docker
+            run_commands(
+                (
+                   'docker buildx build '
+                   f'--platform {architectures} '
+                   f'-t "{name}:{version}" '
+                   '--load '
+                   f'{str(opts.root)}'
+                ), 
+                dryrun=opts.dryrun, 
+                stop_on_error=True
+            )
+
+            if not opts.dryrun:
+                image_id = get_docker_image_id_by_name(name)
+
+            run_commands(f'docker tag {image_id} {workspace}', dryrun=opts.dryrun)
+            run_commands(f'docker push {workspace}', dryrun=opts.dryrun)
+
+        elif repository == 'beaker':
+            
             # CREATE IMAGE
             cmd = ('docker buildx build '
                    f'--platform {architectures} '
