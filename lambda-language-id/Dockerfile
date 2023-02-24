@@ -1,5 +1,5 @@
 # REPO:   ecr://896129387501.dkr.ecr.us-west-2.amazonaws.com/aws-lambda-ft-lang-id
-# VERS:   1.0.0
+# VERS:   2.0.0
 # ARCH:   linux/amd64
 
 FROM public.ecr.aws/lambda/python:3.8

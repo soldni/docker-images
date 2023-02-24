@@ -13,10 +13,16 @@ def detect_language(text: str) -> str:
 # Define the Lambda handler function
 def handler(event, context):
     # Get the text input from the event
-    text = event['text']
+    if isinstance(event, str):
+        text = event
+    else:
+        text = event['text']
 
     # Detect the language of the text using FastText
     language_code = detect_language(text)
 
     # Return the language code as the output of the Lambda function
-    return {'language_code': language_code}
+    if isinstance(event, str):
+        return language_code
+    else:
+        return {'language_code': language_code}
