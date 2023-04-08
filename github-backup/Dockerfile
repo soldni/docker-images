@@ -1,5 +1,5 @@
 # REPO:   docker://soldni/github-backup
-# VERS:   1.0.3
+# VERS:   1.0.4
 # ARCH:   linux/arm64,linux/amd64
 
 FROM alpine:latest

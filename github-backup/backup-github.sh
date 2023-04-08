@@ -46,7 +46,10 @@ for gist in data:
     print("{};{};{}".format(gist["git_push_url"], "_gists", gist["id"]))
 '
 
+# remove trailing slash from github destination
+GITHUB_DEST=${GITHUB_DEST%/}
 
+# function to clone or update a repo
 function clone_update () {
 	REPOS="${1}"
 	for REPO_INFO in $REPOS; do
@@ -99,6 +102,7 @@ if [ "${STATUS_CODE}" != "200" ]; then
 	exit 1
 fi
 
+# this block clones all gists
 PAGE=1
 while true; do
     CONTRIB=$(curl -H "Authorization: token ${GITHUB_OAUTH}" -s "https://api.github.com/gists?type=all&page=${PAGE}" | python3 -c "${PYTHON_GET_URL_GIST}")
@@ -110,6 +114,7 @@ while true; do
 	fi
 done
 
+# this block clones all repos
 PAGE=1
 while true; do
 	CONTRIB=$(curl -H "Authorization: token ${GITHUB_OAUTH}" -s "https://api.github.com/user/repos?type=all&page=${PAGE}" | python3 -c "${PYTHON_GET_URL_REPO}")
