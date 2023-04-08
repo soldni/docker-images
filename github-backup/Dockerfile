@@ -1,5 +1,5 @@
 # REPO:   docker://soldni/github-backup
-# VERS:   1.0.1
+# VERS:   1.0.3
 # ARCH:   linux/arm64,linux/amd64
 
 FROM alpine:latest
@@ -23,7 +23,7 @@ COPY backup-github.sh backup-github.sh
 COPY run.sh run.sh
 
 RUN set -ex &&\
-    apk --no-cache add sudo bash unzip curl git python3 py3-pip &&\
+    apk --no-cache add sudo bash unzip curl git python3 py3-pip openssh-client &&\
     chmod +x backup-github.sh && \
     chmod +x run.sh
 

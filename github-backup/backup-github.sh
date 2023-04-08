@@ -1,30 +1,29 @@
 #!/usr/bin/env bash
 
+set -x
 
 if [ -z ${GITHUB_OAUTH} ]; then
 	echo '$GITHUB_OAUTH is not set'
 	exit 1
 fi
 
-if [-z ${GITHUB_USER}]; then
+if [ -z ${GITHUB_USER} ]; then
 	echo '$GITHUB_USER is not set'
 	exit 1
 fi
 
-if [-z ${GITHUB_DEST}]; then
+if [ -z ${GITHUB_DEST} ]; then
 	echo '$GITHUB_DEST is not set'
 	exit 1
 fi
 
-if [-z ${SSH_KEY_PATH}]; then
+if [ -z ${SSH_KEY_PATH} ]; then
 	echo '$SSH_KEY_PATH is not set'
 	exit 1
 fi
 
 
 ###############################
-
-set -x
 
 CURRENT=`pwd`
 PYTHON_GET_URL_REPO='
@@ -66,8 +65,39 @@ function clone_update () {
 	done
 }
 
+################ Configuring Git (if anything fails, exit) ################
+
+set -e
+
+# start ssh agent
+ eval "$(ssh-agent -s)"
+
+# add github to known hosts
+mkdir -p ~/.ssh && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+# make sure ssh key is not world readable
+chmod 700 ${SSH_KEY_PATH}
+
 # add ssh key to ssh agent so we can clone private repos
 ssh-add ${SSH_KEY_PATH}
+
+# finish configuring git
+set +e
+###########################################################################
+
+# check if we can connect to github
+PERMISSION_DENIED=$(ssh -T git@github.com 2>&1 | grep "Permission denied")
+if [ -n "${PERMISSION_DENIED}" ]; then
+	echo "Permission denied. Check your SSH key."
+	exit 1
+fi
+
+# validate github api key
+STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${GITHUB_OAUTH}" https://api.github.com/user/issues)
+if [ "${STATUS_CODE}" != "200" ]; then
+	echo "Invalid GitHub API key. Check your GITHUB_OAUTH."
+	exit 1
+fi
 
 PAGE=1
 while true; do
