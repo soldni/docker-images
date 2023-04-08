@@ -1,12 +1,12 @@
 # REPO:   docker://soldni/github-backup
-# VERS:   1.0.0
+# VERS:   1.0.1
 # ARCH:   linux/arm64,linux/amd64
 
 FROM alpine:latest
 
 ARG GITHUB_OAUTH
 ARG GITHUB_USER
-ARG GITHUB_DEST="/backup/"
+ARG GITHUB_DEST="/backup"
 ARG SSH_KEY_PATH="/config/id_rsa"
 ARG GITHUB_TIME="00:00"
 
