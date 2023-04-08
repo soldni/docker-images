@@ -22,7 +22,7 @@ Then, run the container with arguments `RCLONE_CONFIG`, `RCLONE_DEST`, and
 to backup to, and the time to run the backup, respectively.
 
 ```bash
- docker run -d \
+ docker run \
     -e RCLONE_TIME=00:00 \
     -v /path/to/config:/config \
     -v /path/to/backup:/backup \
