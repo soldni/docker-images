@@ -169,6 +169,7 @@ def main():
             cmd = ('docker buildx build '
                    f'--platform {architectures} '
                    f'-t "{name}:{version}" '
+                   f'-t "{name}:latest" '
                    '--push '
                    f'{str(opts.root)}')
             if opts.dryrun:
