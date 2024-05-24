@@ -185,7 +185,7 @@ def main():
                 f'docker buildx rm {name}:{version}',
                 f'docker image rm {name}:{version}',
                 dryrun=opts.dryrun,
-                stop_on_error=False   
+                stop_on_error=False
             )
 
             # create new image and load into docker
@@ -196,8 +196,8 @@ def main():
                    f'-t "{name}:{version}" '
                    '--load '
                    f'{str(opts.root)}'
-                ), 
-                dryrun=opts.dryrun, 
+                ),
+                dryrun=opts.dryrun,
                 stop_on_error=True
             )
 
@@ -208,7 +208,6 @@ def main():
             run_commands(f'docker push {workspace}', dryrun=opts.dryrun)
 
         elif repository == 'beaker':
-            
             # CREATE IMAGE
             cmd = ('docker buildx build '
                    f'--platform {architectures} '
@@ -227,6 +226,7 @@ def main():
                             f'-n {name}-{version}',
                             (f'-w {workspace}' if workspace else ''),
                             '{image_id}'))
+
             if opts.dryrun:
                 print(f'DRYRUN: {cmd}')
             else:
