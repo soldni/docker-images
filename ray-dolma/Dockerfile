@@ -10,13 +10,16 @@ CMD ["/bin/bash"]
 
 # install rust and other environment dependencies
 RUN sudo apt-get update &&\
-    sudo apt-get install -y curl make automake apt-utils build-essential &&\
+    sudo apt-get install -y curl make automake apt-utils build-essential pkg-config zlib1g-dev cmake &&\
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rust.sh &&\
     sh rust.sh -y &&\
     sudo apt-get clean
 
-# set home for rust
+# set home for rust and other environment variables
 ENV PATH="${HOME}/.cargo/bin:${PATH}"
+ENV PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+ENV LIBRARY_PATH="/usr/local/opt/zlib/lib"
+ENV C_INCLUDE_PATH="/usr/local/opt/zlib/include"
 
 # install dolma
 RUN git clone https://github.com/allenai/dolma.git &&\
