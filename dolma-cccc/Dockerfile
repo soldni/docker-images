@@ -1,22 +1,26 @@
-# REPO:   docker://soldni/ray-dolma
-# VERS:   1.0.1
+# REPO:   docker://soldni/dolma-cccc
+# VERS:   1.0.0
 # ARCH:   linux/amd64
 
-FROM rayproject/ray:2.23.0-py311-cpu
+FROM python:3.11-slim-bullseye
+
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE=TRUE
 
 WORKDIR /tmp
 
 CMD ["/bin/bash"]
 
 # install rust and other environment dependencies
-RUN sudo apt-get update &&\
-    sudo apt-get install -y curl make automake apt-utils build-essential pkg-config zlib1g-dev cmake &&\
+RUN apt-get update &&\
+    apt-get install -y --no-install-recommends apt-transport-https ca-certificates gnupg awscli curl git make automake apt-utils build-essential pkg-config zlib1g-dev cmake &&\
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o rust.sh &&\
     sh rust.sh -y &&\
-    sudo apt-get clean
+    apt-get clean
 
 # set home for rust and other environment variables
-ENV PATH="${HOME}/.cargo/bin:${PATH}"
+ENV PATH="/root/.cargo/bin:${PATH}"
 ENV PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 ENV LIBRARY_PATH="/usr/local/opt/zlib/lib"
 ENV C_INCLUDE_PATH="/usr/local/opt/zlib/include"
