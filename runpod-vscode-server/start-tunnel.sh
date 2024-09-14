@@ -15,13 +15,13 @@ fi
 
 # Check if the user is logged in by checking if "code tunnel user show" reuturns "not logged in"
 if [ "$(code tunnel user show)" == "not logged in" ]; then
-    code tunnel login --cli-data-dir "${CLI_DATA_DIR}" --provider "${IDENTITY_PROVIDER}"
+    code tunnel user login --cli-data-dir "${CLI_DATA_DIR}" --provider "${IDENTITY_PROVIDER}"
 fi
 
 # Start the tunnel
 code tunnel \
     --server-data-dir "${SERVER_DATA_DIR}" \
     --extensions-dir "${EXTENSIONS_DIR}" \
-    --name "${RUNPOD_POD_HOSTNAME}" \
+    --name "${RUNPOD_POD_HOSTNAME:0:20}" \
     --accept-server-license-terms \
     --cli-data-dir "${CLI_DATA_DIR}"
