@@ -142,7 +142,7 @@ def main():
 
     # CREATE BUILDER
     builder_name = f'{name.replace("/", "_")}_{version.replace("/", "_")}'
-    cmd = f"docker buildx create --name {builder_name} --use"
+    cmd = f"{opts.docker_executable} buildx create --name {builder_name} --use"
     if opts.dryrun:
         print(f"DRYRUN: {cmd}")
     else:
@@ -157,7 +157,7 @@ def main():
         if repository == "docker":
             # CREATE IMAGES AND IMMEDIATELY PUSH TO DOCKER HUB
             cmd = (
-                "docker buildx build "
+                f"{opts.docker_executable} buildx build "
                 f"--platform {architectures} "
                 f'-t "{name}:{version}" '
                 f'-t "{name}:latest" '
@@ -234,7 +234,7 @@ def main():
                     raise RuntimeError("Could upload image to beaker.")
 
             # REMOVE IMAGE FROM LOCAL STORE
-            cmd = "docker image rm {image_id}"
+            cmd = f"{opts.docker_executable} image rm {{image_id}}"
             if opts.dryrun:
                 print(f"DRYRUN: {cmd}")
             else:
