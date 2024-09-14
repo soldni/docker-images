@@ -1,5 +1,5 @@
 # REPO:   docker://soldni/runpod-vscode-server-pytorch
-# VERS:   2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04-r2
+# VERS:   2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04-r3
 # ARCH:   linux/amd64
 
 
@@ -19,4 +19,14 @@ RUN apt-get update && \
     chmod +x /usr/bin/code && \
     chmod +x /usr/bin/start-tunnel.sh
 
-CMD [ "/usr/bin/start-tunnel.sh" ]
+RUN (type -p wget >/dev/null || (apt update && apt-get install wget -y)) \
+	&& mkdir -p -m 755 /etc/apt/keyrings \
+	&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& apt update \
+    && apt install gh -y \
+    && gh auth setup-git
+
+# CMD [ "/usr/bin/start-tunnel.sh" ]
+CMD [ "echo", "hello" ]

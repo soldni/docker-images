@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+q#!/usr/bin/env bash
 
 # Description: Run a script at a specific time every day
 # Usage: run.sh <script to run> <target time>
