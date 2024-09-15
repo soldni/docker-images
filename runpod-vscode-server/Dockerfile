@@ -27,5 +27,4 @@ RUN (type -p wget >/dev/null || (apt update && apt-get install wget -y)) \
 	&& apt update \
     && apt install gh -y
 
-# CMD [ "/usr/bin/start-tunnel.sh" ]
-CMD [ "gh auth setup-git && echo 'hello'" ]
+CMD [ "/usr/bin/start-tunnel.sh" ]
