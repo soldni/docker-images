@@ -1,5 +1,5 @@
 # REPO:   docker://soldni/runpod-vscode-server-pytorch
-# VERS:   2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04-r3
+# VERS:   2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04-r4
 # ARCH:   linux/amd64
 
 
