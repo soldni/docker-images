@@ -1,5 +1,5 @@
 # REPO:   docker://soldni/copy
-# VERS:   1.0.0
+# VERS:   1.0.1
 # ARCH:   linux/amd64
 
 
@@ -24,20 +24,24 @@ if [ -z "\${SRC}" ] || [ -z "\${DST}" ]; then
     exit 1
 fi
 
-if [ ! -e "\${SRC}" ]; then
-    echo "Error: Source path '\${SRC}' does not exist"
+# Remove trailing slashes from paths
+SRC_CLEAN=\$(echo "\${SRC}" | sed 's#/$##')
+DST_CLEAN=\$(echo "\${DST}" | sed 's#/$##')
+
+if [ ! -e "\${SRC_CLEAN}" ]; then
+    echo "Error: Source path '\${SRC_CLEAN}' does not exist"
     echo "Make sure the path is mounted from host system"
     exit 1
 fi
 
-if [ ! -d "\$(dirname "\${DST}")" ]; then
+if [ ! -d "\$(dirname "\${DST_CLEAN}")" ]; then
     echo "Error: Destination parent directory does not exist"
     echo "Make sure the destination path is mounted from host system"
     exit 1
 fi
 
-echo "Copying files from \${SRC} to \${DST}..."
-cp -rpv "\${SRC}" "\${DST}"
+echo "Copying files from \${SRC_CLEAN} to \${DST_CLEAN}..."
+cp -rpv "\${SRC_CLEAN}" "\${DST_CLEAN}"
 EOF
 
 # Make script executable
